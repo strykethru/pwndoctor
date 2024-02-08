@@ -1,0 +1,24 @@
+[
+    {
+        "username": "user1",
+        "password": "$2b$10$L6O6kNr0Yo4yVBmhrSlu.OhtDssrIW9aMf3S0yea2DU7QL9QAxgjG",
+        "firstname": "User",
+        "lastname": "One",
+        "role": "user",
+        "totpEnabled": false,
+        "enabled": true,
+        "email": "user.one@company.com",
+        "phone": "111-111-1111"
+    },
+    {
+        "username": "user2",
+        "password": "$2b$10$j57El0iVRLMsrMRY5XHDsOncvKUEXU03g2XmJOHeQnUFRoZMOwkUK",
+        "firstname": "User",
+        "lastname": "Two",
+        "role": "admin",
+        "totpEnabled": false,
+        "enabled": true,
+        "email": "user.two@company.com",
+        "phone": "222-222-2222"
+    }
+]

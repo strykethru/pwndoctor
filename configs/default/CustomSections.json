@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Attestation",
+        "field": "attestation",
+        "icon": "mdi-file-document-outline"
+    },
+    {
+        "name": "Executive Summary",
+        "field": "executive_summary",
+        "icon": "mdi-presentation"
+    },
+    {
+        "name": "OSINT",
+        "field": "an_osint",
+        "icon": "mdi-search-web"
+    },
+    {
+        "name": "Web Applications",
+        "field": "an_web_applications",
+        "icon": "mdi-web"
+    },
+    {
+        "name": "Internal",
+        "field": "an_internal",
+        "icon": "mdi-selection-ellipse-arrow-inside"
+    },
+    {
+        "name": "Recommendations",
+        "field": "recommendations",
+        "icon": "mdi-comment-text-multiple"
+    }
+]

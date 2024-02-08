@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Penetration Test",
+        "templates": [
+            {
+                "name": "Assessment Summary",
+                "locale": "en",
+                "template": ""
+            }
+        ],
+        "sections": [
+            "attestation",
+            "executive_summary",
+            "osint",
+            "web_applications",
+            "internal",
+            "recommendations"
+        ],
+        "hidden": []
+    }
+
+]

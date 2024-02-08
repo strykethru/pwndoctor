@@ -1,0 +1,43 @@
+{
+    "report": {
+        "public": {
+            "cvssColors": {
+                "noneColor": "#53aa33",
+                "lowColor": "#facb10",
+                "mediumColor": "#f7a00a",
+                "highColor": "#ff0000",
+                "criticalColor": "#ab0000"
+            },
+            "remediationColorsComplexity": {
+                "lowColor": "#4472c4",
+                "mediumColor": "#ffc000",
+                "highColor": "#FF2F2F"
+            },
+            "remediationColorsPriority": {
+                "lowColor": "#4472c4",
+                "mediumColor": "#ffc000",
+                "highColor": "#ff2f2f",
+                "urgentColor": "#C00000"
+            },
+            "captions": [
+                "Figure"
+            ],
+            "extendCvssTemporalEnvironment": false
+        },
+        "private": {
+            "imageBorder": true,
+            "imageBorderColor": "#ededed"
+        },
+        "enabled": true
+    },
+    "reviews": {
+        "public": {
+            "mandatoryReview": false,
+            "minReviewers": 1
+        },
+        "private": {
+            "removeApprovalsUponUpdate": false
+        },
+        "enabled": false
+    }
+}

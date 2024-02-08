@@ -1,0 +1,110 @@
+[
+    {
+        "label": "text",
+        "fieldType": "text",
+        "display": "section",
+        "displaySub": "Attestation",
+        "size": 12,
+        "offset": 0,
+        "required": true,
+        "description": "",
+        "text": [
+            {
+                "locale": "en",
+                "value": "<p>Text for attestation.</p>"
+            }
+        ],
+        "options": [],
+        "position": 1010
+    },
+    {
+        "label": "text",
+        "fieldType": "text",
+        "display": "section",
+        "displaySub": "Executive Summary",
+        "size": 12,
+        "offset": 0,
+        "required": true,
+        "description": "",
+        "text": [
+            {
+                "locale": "en",
+                "value": "<p>Executive summary text.</p>"
+            }
+        ],
+        "options": [],
+        "position": 1020
+    },
+    {
+        "label": "text",
+        "fieldType": "text",
+        "display": "section",
+        "displaySub": "OSINT",
+        "size": 12,
+        "offset": 0,
+        "required": true,
+        "description": "OSINT Details",
+        "text": [
+            {
+                "locale": "en",
+                "value": "<h2>OSINT</h2><p>we did stuff</p>"
+            }
+        ],
+        "options": [],
+        "position": 2010
+    },
+    {
+        "label": "text",
+        "fieldType": "text",
+        "display": "section",
+        "displaySub": "Web Applications",
+        "size": 12,
+        "offset": 0,
+        "required": true,
+        "description": "",
+        "text": [
+            {
+                "locale": "en",
+                "value": "<h2>Web Application Testing</h2><p>We did Web App Stuff.</p>"
+            }
+        ],
+        "options": [],
+        "position": 2060
+    },
+    {
+        "label": "text",
+        "fieldType": "text",
+        "display": "section",
+        "displaySub": "Internal",
+        "size": 12,
+        "offset": 0,
+        "required": true,
+        "description": "",
+        "text": [
+            {
+                "locale": "en",
+                "value": "<h2>Internal</h2><p>We did internal stuff.</p>"
+            }
+        ],
+        "options": [],
+        "position": 2070
+    },
+    {
+        "fieldType": "text",
+        "label": "text",
+        "display": "section",
+        "displaySub": "Recommendations",
+        "size": 12,
+        "offset": 0,
+        "required": true,
+        "description": "",
+        "text": [
+            {
+                "locale": "en",
+                "value": "<h3>Technical Recommendations</h3><ul><li><p>Implement these changes...</p></li><li><p>&lt;REPLACE_ME&gt;</p></li></ul><h3>Strategic Recommendations</h3><ul><li><p>&lt;REPLACE_ME&gt;</p></li><li><p>&lt;REPLACE_ME&gt;</p></li></ul>"
+            }
+        ],
+        "options": [],
+        "position": 3010
+    }
+]

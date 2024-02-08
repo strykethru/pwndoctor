@@ -1,0 +1,23 @@
+[
+    {
+      "cvssv3": "CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:N",
+      "priority": "1",
+      "remediationComplexity": "1",
+      "details": [
+        {
+          "locale": "en",
+          "title": "Vulnerability Example - 1",
+          "vulnType": "ExampleVulnType1",
+          "description": "<p>Description of vuln example 1</p>",
+          "observation": "<p>Observation of vuln example 1</p>",
+          "remediation": "<p>Remediation of vuln exmpale 1</p>",
+          "references": [
+            null
+          ],
+          "customFields": [
+          ]
+        }
+      ],
+      "category": "Internal"
+    }
+]
