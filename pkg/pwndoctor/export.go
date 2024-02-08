@@ -200,14 +200,7 @@ func ExportReport(auditID, auditName string) error {
 }
 
 func ExportVulnerabilitiesDatabase(exportFile string) error {
-	vulnerabilitiesUrl := fmt.Sprintf("%s/api/vulnerabilities/export", pwndocAPI.URL)
-	body, err := pwndoc.BodyFromGetRequest(vulnerabilitiesUrl, pwndocAPI.Token, pwndocAPI.HTTPClient)
-	if err != nil {
-		return err
-	}
-
-	var exportedVulnerabilities pwndoc.APIResponseVulnerabilitiesExport
-	err = json.Unmarshal(body, &exportedVulnerabilities)
+	exportedVulnerabilities, err := pwndocAPI.ExportVulnerabilities()
 	if err != nil {
 		return err
 	}
@@ -220,7 +213,6 @@ func ExportVulnerabilitiesDatabase(exportFile string) error {
 }
 
 func ExportMongoDB(exportFile, pwndocSSHUser, pwndocSSHHost string) error {
-
 	if //goland:noinspection ALL
 	runtime.GOOS == "windows" {
 		return errors.New("not supported on windows yet")

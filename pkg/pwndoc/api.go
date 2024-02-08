@@ -33,6 +33,7 @@ const PathTemplates = "/api/templates"
 const PathUserInit = "/api/users/init"
 const PathUsers = "/api/users"
 const PathVulnerabilities = "/api/vulnerabilities"
+const PathVulnerabilitiesExport = "/api/vulnerabilities/export"
 
 func New(pwndocURL string) *API {
 	return &API{
@@ -245,6 +246,17 @@ func (api *API) CreateVulnerabilities(vulnerabilities APIVulnerabilities) (bool,
 	}
 
 	return true, nil
+}
+
+func (api *API) ExportVulnerabilities() (*APIResponseVulnerabilitiesExport, error) {
+	body, err := api.GetResponseBody(PathVulnerabilitiesExport)
+	if err != nil {
+		return nil, err
+	}
+
+	var exportedVulnerabilities APIResponseVulnerabilitiesExport
+	err = json.Unmarshal(body, &exportedVulnerabilities)
+	return &exportedVulnerabilities, err
 }
 
 func (api *API) CreateUsers(customUsers []APIUser) (bool, error) {
