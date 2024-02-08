@@ -275,3 +275,14 @@ func (api *API) CreateSettings(customSettings APISettings) (bool, error) {
 
 	return true, nil
 }
+
+func (api *API) GetSettings() (*APIResponseSettings, error) {
+	body, err := api.GetResponseBody(PathSettings)
+	if err != nil {
+		return nil, err
+	}
+
+	var exportedSettings APIResponseSettings
+	err = json.Unmarshal(body, &exportedSettings)
+	return &exportedSettings, err
+}

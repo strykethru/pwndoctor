@@ -250,14 +250,7 @@ func ExportMongoDB(exportFile, pwndocSSHUser, pwndocSSHHost string) error {
 }
 
 func ExportSettings(exportFile string) error {
-	settingsURL := fmt.Sprintf("%s/api/settings", pwndocAPI.URL)
-	body, err := pwndoc.BodyFromGetRequest(settingsURL, pwndocAPI.Token, pwndocAPI.HTTPClient)
-	if err != nil {
-		return err
-	}
-
-	var exportedSettings pwndoc.APIResponseSettingsExport
-	err = json.Unmarshal(body, &exportedSettings)
+	exportedSettings, err := GetPwndocAPI().GetSettings()
 	if err != nil {
 		return err
 	}

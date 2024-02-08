@@ -368,47 +368,7 @@ type APIResponseVulnerabilitiesExport struct {
 	} `json:"datas"`
 }
 
-type APIResponseSettingsExport struct {
-	Status string `json:"status"`
-	Data   struct {
-		Report struct {
-			Public struct {
-				CVSSColors struct {
-					NoneColor     string `json:"noneColor"`
-					LowColor      string `json:"lowColor"`
-					MediumColor   string `json:"mediumColor"`
-					HighColor     string `json:"highColor"`
-					CriticalColor string `json:"criticalColor"`
-				} `json:"cvssColors"`
-				RemediationColorsComplexity struct {
-					LowColor    string `json:"lowColor"`
-					MediumColor string `json:"mediumColor"`
-					HighColor   string `json:"highColor"`
-				} `json:"remediationColorsComplexity"`
-				RemediationColorsPriority struct {
-					LowColor    string `json:"lowColor"`
-					MediumColor string `json:"mediumColor"`
-					HighColor   string `json:"highColor"`
-					UrgentColor string `json:"urgentColor"`
-				} `json:"remediationColorsPriority"`
-				Captions                      []string `json:"captions"`
-				ExtendCVSSTemporalEnvironment bool     `json:"extendCvssTemporalEnvironment"`
-			} `json:"public"`
-			Private struct {
-				ImageBorder      bool   `json:"imageBorder"`
-				ImageBorderColor string `json:"imageBorderColor"`
-			} `json:"private"`
-			Enabled bool `json:"enabled"`
-		} `json:"report"`
-		Reviews struct {
-			Public struct {
-				MandatoryReview bool `json:"mandatoryReview"`
-				MinReviewers    int  `json:"minReviewers"`
-			} `json:"public"`
-			Private struct {
-				RemoveApprovalsUponUpdate bool `json:"removeApprovalsUponUpdate"`
-			} `json:"private"`
-			Enabled bool `json:"enabled"`
-		} `json:"reviews"`
-	} `json:"datas"`
+type APIResponseSettings struct {
+	Status string      `json:"status"`
+	Data   APISettings `json:"datas"`
 }
