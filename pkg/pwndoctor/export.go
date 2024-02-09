@@ -20,6 +20,9 @@ const MongoDMDockerExport = "docker exec -i mongo-pwndoc-ng /usr/bin/mongodump -
 func DoExport(includeAuditNames []string, pwndocSSHUser, pwndocSSHHost string) {
 
 	allAudits, err := pwndocAPI.GetAudits()
+	if err != nil {
+		fmt.Printf("Error getting audits from pwndoc: %s", err)
+	}
 
 	if len(includeAuditNames) == 0 {
 		retrievedAudits, err := pwndocAPI.GetAudits()

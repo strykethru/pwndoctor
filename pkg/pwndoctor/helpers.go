@@ -139,7 +139,7 @@ func CreateAuditTypes() {
 	for _, template := range retrievedCustomTemplates.Data {
 		fmt.Println(template.Name)
 		if template.Name == DefaultReportName {
-			fmt.Println("\n[+] Found Default Report: %s", template.ID)
+			fmt.Printf("\n[+] Found Default Report: %s", template.ID)
 			defaultTemplate = template.ID
 			break
 		}
