@@ -38,6 +38,7 @@ func GetPwndocAPI() *pwndoc.API {
 	return pwndocAPI
 }
 
+//goland:noinspection GoUnusedExportedFunction
 func SetDefaultReportName(newDefaultName string) {
 	DefaultReportName = newDefaultName
 }

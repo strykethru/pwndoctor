@@ -10,7 +10,7 @@
           "vulnType": "ExampleVulnType1",
           "description": "<p>Description of vuln example 1</p>",
           "observation": "<p>Observation of vuln example 1</p>",
-          "remediation": "<p>Remediation of vuln exmpale 1</p>",
+          "remediation": "<p>Remediation of vuln example 1</p>",
           "references": [
             null
           ],

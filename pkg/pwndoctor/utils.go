@@ -55,7 +55,7 @@ func GetCredentialsFromSecretsService() (pwndoc.APILogin, error) {
 		}
 	}
 
-	return credentials, errors.New("unable to load creds from secrets service")
+	return credentials, errors.New("unable to load credentials from secrets service")
 }
 
 func GetCredentialToken() (string, string, string) {
