@@ -3,7 +3,7 @@ module github.com/strykethru/pwndoctor
 go 1.21.6
 
 require (
-	github.com/defektive/secrets v0.0.0-20240207213514-eef631f451c6
+	github.com/defektive/secrets v0.0.0-20240208230349-0eecddc565fb
 	github.com/spf13/cobra v1.8.0
 )
 

@@ -6,10 +6,16 @@ type APIAudit struct {
 	ID            string `json:"_id"`
 	Name          string `json:"name"`
 	AuditType     string `json:"auditType"`
-	Collaborators []any  `json:"collaborators"`
-	Reviewers     []any  `json:"reviewers"`
-	Language      string `json:"language"`
-	Template      struct {
+	Collaborators []struct {
+		ID       string `json:"_id"`
+		Username string `json:"username"`
+	} `json:"collaborators"`
+	Reviewers []struct {
+		ID       string `json:"_id"`
+		Username string `json:"username"`
+	} `json:"reviewers"`
+	Language string `json:"language"`
+	Template struct {
 		ID        string    `json:"_id"`
 		Name      string    `json:"name"`
 		Ext       string    `json:"ext"`
