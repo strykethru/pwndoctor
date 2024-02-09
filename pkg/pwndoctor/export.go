@@ -233,7 +233,7 @@ func ExportMongoDB(exportFile, pwndocSSHUser, pwndocSSHHost string) error {
 		MongoDMDockerExport,
 	}
 
-	if pwndocSSHUser == "" {
+	if pwndocSSHHost == "" {
 		// no IP assume local
 		baseCmd = "bash"
 		cmdArgs = []string{
@@ -244,6 +244,7 @@ func ExportMongoDB(exportFile, pwndocSSHUser, pwndocSSHHost string) error {
 
 	out, err := exec.Command(baseCmd, cmdArgs...).Output()
 	if err != nil {
+		fmt.Println(out)
 		return err
 	}
 	return os.WriteFile(exportFile, out, 0644)
