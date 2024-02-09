@@ -46,6 +46,7 @@ func DoExport(includeAuditNames []string, pwndocSSHUser, pwndocSSHHost string) {
 				}
 			}
 			if !isAuditIncluded {
+				fmt.Println("Skipping...")
 				continue
 			}
 		}
@@ -63,6 +64,7 @@ func DoExport(includeAuditNames []string, pwndocSSHUser, pwndocSSHHost string) {
 			}
 		}
 
+		fmt.Printf("Exporting Audit:(%s) Company:(%s)", audit.Name, audit.Company.Name)
 		err = ExportAudit(audit)
 		if err != nil {
 			log.Fatal("Error reading response body (exporting audit): ", err)

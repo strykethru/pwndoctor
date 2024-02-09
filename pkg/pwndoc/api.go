@@ -131,13 +131,13 @@ func (api *API) GetAudits() (*APIResponseAudits, error) {
 	return &retrievedAudits, err
 }
 
-func (api *API) GetAudit(auditID string) (*APIResponseAuditInformation, error) {
+func (api *API) GetAudit(auditID string) (*APIResponseAudit, error) {
 	auditResponseBody, err := api.GetResponseBody(path.Join(PathAudits, auditID))
 	if err != nil {
 		return nil, err
 	}
 
-	var retrievedAuditInformation APIResponseAuditInformation
+	var retrievedAuditInformation APIResponseAudit
 	err = json.Unmarshal(auditResponseBody, &retrievedAuditInformation)
 	return &retrievedAuditInformation, err
 }
