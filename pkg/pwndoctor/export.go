@@ -185,7 +185,10 @@ func ExportAudit(audit pwndoc.APIAudit) error {
 			return err
 		}
 		fileName := fmt.Sprintf("exports/%s/audit-findings/%s-finding.json", audit.Name, finding.ID)
-		return os.WriteFile(fileName, file, 0644)
+		err = os.WriteFile(fileName, file, 0644)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil
