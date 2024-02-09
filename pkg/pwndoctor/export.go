@@ -15,7 +15,7 @@ import (
 	"time"
 )
 
-const MongoDMDockerExport = "docker exec -i mongo-pwndoc-ng /usr/bin/mongodump --uri=mongodb://127.0.0.1/pwndoc --archive"
+const MongoDBDockerExport = "docker exec -i mongo-pwndoc-ng /usr/bin/mongodump --uri=mongodb://127.0.0.1/pwndoc --archive"
 
 func DoExport(includeAuditNames []string, pwndocSSHUser, pwndocSSHHost string) {
 
@@ -230,7 +230,7 @@ func ExportMongoDB(exportFile, pwndocSSHUser, pwndocSSHHost string) error {
 
 	cmdArgs := []string{
 		fmt.Sprintf("%s@%s", pwndocSSHUser, pwndocSSHHost),
-		MongoDMDockerExport,
+		MongoDBDockerExport,
 	}
 
 	if pwndocSSHHost == "" {
@@ -238,7 +238,7 @@ func ExportMongoDB(exportFile, pwndocSSHUser, pwndocSSHHost string) error {
 		baseCmd = "bash"
 		cmdArgs = []string{
 			"-c",
-			MongoDMDockerExport,
+			MongoDBDockerExport,
 		}
 	}
 
