@@ -204,30 +204,61 @@ type APIResponseLogin struct {
 }
 
 type APIFindingDetails struct {
-	Title              string  `json:"title"`
-	Category           string  `json:"category"`
-	Type               string  `json:"type"`
-	Description        string  `json:"description"`
-	MitreAttack        string  `json:"mitre_attack"`
-	Count              int     `json:"count"`
-	Closed             bool    `json:"closed"`
-	CVSSScore          float64 `json:"cvss_score"`
-	CVSSString         string  `json:"cvss_string"`
-	AffectedAssets     string  `json:"affected_assets"`
-	Evidence           string  `json:"evidence"`
-	Detection          string  `json:"detection"`
-	Summary            string  `json:"summary"`
-	Recommendations    string  `json:"recommendations"`
-	References         string  `json:"references"`
-	Reviewed           bool    `json:"reviewed"`
-	ResourceIdentifier string  `json:"resource_identifier"`
-	CreatedDate        string  `json:"created_date"`
-	UpdatedDate        string  `json:"updated_date"`
-	ExternalUUID       string  `json:"external_uuid"`
+	Identifier            int      `json:"identifier,omitempty"`
+	Title                 string   `json:"title,omitempty"`
+	VulnType              string   `json:"vulnType,omitempty"`
+	Description           string   `json:"description,omitempty"`
+	Observation           string   `json:"observation,omitempty"`
+	Remediation           string   `json:"remediation,omitempty"`
+	RemediationComplexity int      `json:"remediationComplexity,omitempty"`
+	Priority              int      `json:"priority,omitempty"`
+	References            []string `json:"references,omitempty"`
+	CVSSv3                string   `json:"cvssv3,omitempty"`
+	Status                int      `json:"status,omitempty"`
+	Category              string   `json:"category,omitempty"`
+	CustomFields          []struct {
+		CustomField struct {
+			ID          string `json:"_id,omitempty"`
+			FieldType   string `json:"fieldType,omitempty"`
+			Label       string `json:"label,omitempty"`
+			Display     string `json:"display,omitempty"`
+			DisplaySub  string `json:"displaySub,omitempty"`
+			Size        int    `json:"size,omitempty"`
+			Offset      int    `json:"offset,omitempty"`
+			Required    bool   `json:"required,omitempty"`
+			Description string `json:"description,omitempty"`
+			Options     []struct {
+				Locale string `json:"locale,omitempty"`
+				Value  string `json:"value,omitempty"`
+			} `json:"options,omitempty"`
+		} `json:"customField,omitempty"`
+		Text string `json:"text,omitempty"`
+	} `json:"customFields,omitempty"`
+	ID         string `json:"_id,omitempty"`
+	Paragraphs []any  `json:"paragraphs,omitempty"`
+	Poc        string `json:"poc,omitempty"`
+	Scope      string `json:"scope,omitempty"`
+
+	Type               string  `json:"type,omitempty"`
+	MitreAttack        string  `json:"mitre_attack,omitempty"`
+	Count              int     `json:"count,omitempty"`
+	Closed             bool    `json:"closed,omitempty"`
+	CVSSScore          float64 `json:"cvss_score,omitempty"`
+	CVSSString         string  `json:"cvss_string,omitempty"`
+	AffectedAssets     string  `json:"affected_assets,omitempty"`
+	Evidence           string  `json:"evidence,omitempty"`
+	Detection          string  `json:"detection,omitempty"`
+	Summary            string  `json:"summary,omitempty"`
+	Recommendations    string  `json:"recommendations,omitempty"`
+	Reviewed           bool    `json:"reviewed,omitempty"`
+	ResourceIdentifier string  `json:"resource_identifier,omitempty"`
+	CreatedDate        string  `json:"created_date,omitempty"`
+	UpdatedDate        string  `json:"updated_date,omitempty"`
+	ExternalUUID       string  `json:"external_uuid,omitempty"`
 
 	// maybe remove this
-	Criticality   string `json:"criticality"`
-	AttackSurface string `json:"attack_surface"`
+	Criticality   string `json:"criticality,omitempty"`
+	AttackSurface string `json:"attack_surface,omitempty"`
 }
 
 type APIResponseVulnerabilitiesExport struct {

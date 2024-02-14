@@ -166,12 +166,12 @@ func ExportAudit(audit pwndoc.APIAudit) error {
 		markdownRecommendations, _ := converter.ConvertString(finding.Remediation)
 		pwndoc.DownloadImagesInContent(finding.Remediation, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.ID)
 		findingDetails.Recommendations = markdownRecommendations
-		var concatenatedReferences string
-		for _, reference := range finding.References {
-			concatenatedReferences += reference + "<br>"
-		}
-		markdownReferences, _ := converter.ConvertString(concatenatedReferences)
-		findingDetails.References = markdownReferences
+		//var concatenatedReferences string
+		//for _, reference := range finding.References {
+		//	concatenatedReferences += reference + "<br>"
+		//}
+		//markdownReferences, _ := converter.ConvertString(concatenatedReferences)
+		findingDetails.References = finding.References
 		findingDetails.Reviewed = true
 		nowTime := time.Now()
 
