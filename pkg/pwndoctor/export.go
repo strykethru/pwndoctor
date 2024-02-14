@@ -55,7 +55,7 @@ func DoExport(includeAuditNames []string, pwndocSSHUser string, pwndocSSHHost st
 			}
 		}
 
-		fmt.Println("  [+] Audit ID: ", audit.ID)
+		fmt.Println("[+] Audit ID: ", audit.ID)
 		fmt.Println("[+] Exporting Audit info...")
 
 		dirList := []string{"audit-findings", "images", "report"}
@@ -68,10 +68,10 @@ func DoExport(includeAuditNames []string, pwndocSSHUser string, pwndocSSHHost st
 			}
 		}
 
-		fmt.Printf("Exporting Audit:(%s) Company:(%s)", audit.Name, audit.Company.Name)
+		fmt.Printf("[+] Exporting Audit:(%s) Company:(%s)", audit.Name, audit.Company.Name)
 		err = ExportAudit(audit)
 		if err != nil {
-			log.Fatal("Error reading response body (exporting audit): ", err)
+			log.Fatal("[-] Error reading response body (exporting audit): ", err)
 		}
 		fmt.Println("\n[+] Done exporting exporting audit info...")
 
@@ -83,7 +83,7 @@ func DoExport(includeAuditNames []string, pwndocSSHUser string, pwndocSSHHost st
 
 		err = ExportReport(audit.ID, audit.Name)
 		if err != nil {
-			log.Fatal("Error reading response body (exporting report): ", err)
+			log.Fatal("[-] Error reading response body (exporting report): ", err)
 		}
 		fmt.Println("[+] Finished Exporting Engagement Report")
 
@@ -98,7 +98,7 @@ func DoExport(includeAuditNames []string, pwndocSSHUser string, pwndocSSHHost st
 	fmt.Println("\n[+] Dumping APIVulnerabilities Database...")
 	err = ExportVulnerabilitiesDatabase("exports/VULN-DB.json")
 	if err != nil {
-		log.Fatal("Error exporting vulnerabilities database: ", err)
+		log.Fatal("[-] Error exporting vulnerabilities database: ", err)
 	}
 	fmt.Println("[+] Finished Dumping APIVulnerabilities Database!")
 
@@ -109,7 +109,7 @@ func DoExport(includeAuditNames []string, pwndocSSHUser string, pwndocSSHHost st
 	fmt.Println("\n[+] Dumping MongoDB...")
 	err = ExportMongoDB("exports/mongodb.dump", pwndocSSHUser, pwndocSSHHost)
 	if err != nil {
-		log.Printf("Error exporting mongodb: %s", err)
+		log.Printf("[-] Error exporting mongodb: %s", err)
 		return
 	}
 	fmt.Println("[+] Finished Dumping MongoDB!")
@@ -121,7 +121,7 @@ func DoExport(includeAuditNames []string, pwndocSSHUser string, pwndocSSHHost st
 	fmt.Println("\n[+] Dumping APISettings...")
 	err = ExportSettings("exports/settings.json")
 	if err != nil {
-		log.Fatal("Error exporting settings: ", err)
+		log.Fatal("[-] Error exporting settings: ", err)
 	}
 	fmt.Println("[+] Finished Dumping APISettings!")
 
