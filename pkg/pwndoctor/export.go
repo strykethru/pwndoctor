@@ -145,6 +145,9 @@ func ExportAudit(audit pwndoc.APIAudit) error {
 		if err != nil {
 			return err
 		}
+
+		pwndoc.DownloadImagesInContent(finding.Poc, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.ID)
+		pwndoc.DownloadImagesInContent(finding.Remediation, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.ID)
 	}
 
 	return nil
