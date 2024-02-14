@@ -205,8 +205,7 @@ type APIResponseLogin struct {
 
 type APIFindingDetails struct {
 	Title              string  `json:"title"`
-	Criticality        string  `json:"criticality"`
-	AttackSurface      string  `json:"attack_surface"`
+	Category           string  `json:"category"`
 	Type               string  `json:"type"`
 	Description        string  `json:"description"`
 	MitreAttack        string  `json:"mitre_attack"`
@@ -225,6 +224,10 @@ type APIFindingDetails struct {
 	CreatedDate        string  `json:"created_date"`
 	UpdatedDate        string  `json:"updated_date"`
 	ExternalUUID       string  `json:"external_uuid"`
+
+	// maybe remove this
+	Criticality   string `json:"criticality"`
+	AttackSurface string `json:"attack_surface"`
 }
 
 type APIResponseVulnerabilitiesExport struct {

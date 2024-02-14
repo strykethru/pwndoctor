@@ -145,7 +145,7 @@ func ExportAudit(audit pwndoc.APIAudit) error {
 	converter := md.NewConverter("", true, nil)
 	for _, finding := range retrievedAuditInformation.Data.Findings {
 		findingDetails.Title = finding.Title
-
+		findingDetails.Category = finding.Category
 		findingDetails.Type = "FINDING"
 		markdownDescription, _ := converter.ConvertString(finding.Observation)
 		findingDetails.Description = markdownDescription
