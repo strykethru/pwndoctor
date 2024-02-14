@@ -4,16 +4,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/strykethru/pwndoctor/pkg/pwndoc"
 	"log"
 	"os"
 	"os/exec"
 	"runtime"
-	"strings"
-	"time"
-
-	md "github.com/JohannesKaufmann/html-to-markdown"
-	"github.com/goark/go-cvss/v3/metric"
-	"github.com/strykethru/pwndoctor/pkg/pwndoc"
 )
 
 const MongoDBDockerExport = "docker exec -i mongo-pwndoc-ng /usr/bin/mongodump --uri=mongodb://127.0.0.1/pwndoc --archive"
@@ -140,52 +135,8 @@ func ExportAudit(audit pwndoc.APIAudit) error {
 		return err
 	}
 
-	var findingDetails pwndoc.APIFindingDetails
-
-	converter := md.NewConverter("", true, nil)
 	for _, finding := range retrievedAuditInformation.Data.Findings {
-		findingDetails.Title = finding.Title
-		findingDetails.Category = finding.Category
-		findingDetails.Criticality = finding.Criticality
-		findingDetails.Type = "FINDING"
-		markdownDescription, _ := converter.ConvertString(finding.Observation)
-		findingDetails.Description = markdownDescription
-		findingDetails.Count = 1
-		findingDetails.CVSSString = finding.CVSSv3
-		bm, _ := metric.NewBase().Decode(finding.CVSSv3)
-		findingDetails.CVSSScore = bm.Score()
-		findingDetails.Closed = false
-		markdownAffectedAssets, _ := converter.ConvertString(finding.Scope)
-		findingDetails.AffectedAssets = markdownAffectedAssets
-		markdownEvidence, _ := converter.ConvertString(finding.Poc)
-		pwndoc.DownloadImagesInContent(finding.Poc, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.ID)
-		findingDetails.Evidence = markdownEvidence
-		findingDetails.Detection = ""
-		markdownSummary, _ := converter.ConvertString(finding.Description)
-		findingDetails.Summary = markdownSummary
-		markdownRecommendations, _ := converter.ConvertString(finding.Remediation)
-		pwndoc.DownloadImagesInContent(finding.Remediation, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.ID)
-		findingDetails.Recommendations = markdownRecommendations
-		//var concatenatedReferences string
-		//for _, reference := range finding.References {
-		//	concatenatedReferences += reference + "<br>"
-		//}
-		//markdownReferences, _ := converter.ConvertString(concatenatedReferences)
-		findingDetails.References = finding.References
-		findingDetails.Reviewed = true
-		nowTime := time.Now()
-
-		// I think these are controlled by the server.
-		findingDetails.CreatedDate = fmt.Sprintf("%d-%d-%dT%d:%d:%d.%d", nowTime.Year(), nowTime.Month(), nowTime.Day(), nowTime.Hour(), nowTime.Minute(), nowTime.Second(), nowTime.Nanosecond()/1000000)
-		findingDetails.UpdatedDate = fmt.Sprintf("%d-%d-%dT%d:%d:%d.%d", nowTime.Year(), nowTime.Month(), nowTime.Day(), nowTime.Hour(), nowTime.Minute(), nowTime.Second(), nowTime.Nanosecond()/1000000)
-		//goland:noinspection SpellCheckingInspection
-		newUUID, err := exec.Command("uuidgen").Output()
-		if err != nil {
-			return err
-		}
-		findingDetails.ExternalUUID = strings.TrimSuffix(string(newUUID), "\n")
-
-		file, err := json.MarshalIndent(findingDetails, "", "  ")
+		file, err := json.MarshalIndent(finding, "", "  ")
 		if err != nil {
 			return err
 		}
