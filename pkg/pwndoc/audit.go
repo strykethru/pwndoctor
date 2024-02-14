@@ -73,6 +73,7 @@ type APIAudit struct {
 		CVSSv3                string   `json:"cvssv3"`
 		Status                int      `json:"status"`
 		Category              string   `json:"category"`
+		Criticality           string   `json:"criticality,omitempty"`
 		CustomFields          []struct {
 			CustomField struct {
 				ID          string `json:"_id"`
