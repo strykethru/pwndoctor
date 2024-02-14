@@ -4,20 +4,21 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	md "github.com/JohannesKaufmann/html-to-markdown"
-	"github.com/goark/go-cvss/v3/metric"
-	"github.com/strykethru/pwndoctor/pkg/pwndoc"
 	"log"
 	"os"
 	"os/exec"
 	"runtime"
 	"strings"
 	"time"
+
+	md "github.com/JohannesKaufmann/html-to-markdown"
+	"github.com/goark/go-cvss/v3/metric"
+	"github.com/strykethru/pwndoctor/pkg/pwndoc"
 )
 
 const MongoDBDockerExport = "docker exec -i mongo-pwndoc-ng /usr/bin/mongodump --uri=mongodb://127.0.0.1/pwndoc --archive"
 
-func DoExport(includeAuditNames []string, pwndocSSHUser, pwndocSSHHost string) {
+func DoExport(includeAuditNames []string, pwndocSSHUser string, pwndocSSHHost string) {
 
 	allAudits, err := pwndocAPI.GetAudits()
 	if err != nil {
@@ -220,7 +221,7 @@ func ExportVulnerabilitiesDatabase(exportFile string) error {
 	return os.WriteFile(exportFile, file, 0644)
 }
 
-func ExportMongoDB(exportFile, pwndocSSHUser, pwndocSSHHost string) error {
+func ExportMongoDB(exportFile string, pwndocSSHUser string, pwndocSSHHost string) error {
 	if //goland:noinspection ALL
 	runtime.GOOS == "windows" {
 		return errors.New("not supported on windows yet")

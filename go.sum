@@ -8,10 +8,6 @@ github.com/andybalholm/cascadia v1.3.2/go.mod h1:7gtRlve5FxPPgIgX36uWBX58OdBsSS6
 github.com/cpuguy83/go-md2man/v2 v2.0.3/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/defektive/secrets v0.0.0-20240207213514-eef631f451c6 h1:uvZAhAjFYXtxi0KnGUMH8R81hdC5qiWfea/5EvSSlmc=
-github.com/defektive/secrets v0.0.0-20240207213514-eef631f451c6/go.mod h1:/i6fAzQhqumH/20jxPXDEHMgiW3Jy8qTHQTsPWpUh1s=
-github.com/defektive/secrets v0.0.0-20240208230349-0eecddc565fb h1:bbQaw6M9gmuox/d87ExPIqy6cTBwnlUiGQWnp5AZxTM=
-github.com/defektive/secrets v0.0.0-20240208230349-0eecddc565fb/go.mod h1:WOmkvBnWkS4xm8hOwSigYFr9vKC9rZ+oSIuq7NlJ3bo=
 github.com/defektive/secrets v0.0.0-20240209185951-34e9ac982015 h1:U3+UgNDL+i0Lim65Hte98UzAwnc4ieB3e5PLfJ7iI30=
 github.com/defektive/secrets v0.0.0-20240209185951-34e9ac982015/go.mod h1:WOmkvBnWkS4xm8hOwSigYFr9vKC9rZ+oSIuq7NlJ3bo=
 github.com/fatih/color v1.16.0 h1:zmkK9Ngbjj+K0yRhTVONQh1p/HknKYSlNT+vZCzyokM=
