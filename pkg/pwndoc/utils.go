@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-func DownloadImagesInContent(findingPOC string, token string, client *http.Client, audit string) {
+func DownloadImagesInContent(findingPOC string, token string, client *http.Client, audit string) error {
 	re1, _ := regexp.Compile(`src=\"(\d.*?)\"`)
 	re2, _ := regexp.Compile(`\w{24}`)
 
@@ -22,28 +22,36 @@ func DownloadImagesInContent(findingPOC string, token string, client *http.Clien
 		var pwnDocImages APIResponseImage
 		body, err := BodyFromGetRequest(imagesURL, token, client)
 		if err != nil {
-			log.Fatal("Error reading response body (AUDIT INFO): ", err)
+			return err
 		}
 		err = json.Unmarshal(body, &pwnDocImages)
 		if err != nil {
-			fmt.Println(body)
-			log.Fatal("Error Unmarshalling (AUDIT INFO): ", err)
+			return err
 		}
 
 		firstPartOfImage := strings.Split(pwnDocImages.Data.Value, ",")
 		imageType := firstPartOfImage[0]
 		var imageB64String string
-		var imageFileName string
+		var imageFileExt string
 		switch imageType {
 		case "data:image/jpeg;base64":
 			imageB64String = strings.ReplaceAll(pwnDocImages.Data.Value, "data:image/jpeg;base64,", "")
-			imageFileName = fmt.Sprintf("exports/%s/images/%s.jpeg", audit, pwnDocImages.Data.ID)
+			imageFileExt = "jpeg"
 		case "data:image/png;base64":
 			imageB64String = strings.ReplaceAll(pwnDocImages.Data.Value, "data:image/png;base64,", "")
-			imageFileName = fmt.Sprintf("exports/%s/images/%s.png", audit, pwnDocImages.Data.ID)
+			imageFileExt = "png"
 		}
 		// add defaults
-		decImage, _ := base64.RawStdEncoding.DecodeString(imageB64String)
-		_ = os.WriteFile(imageFileName, decImage, 0644)
+		decImage, err := base64.StdEncoding.DecodeString(imageB64String)
+		if err != nil {
+			log.Println(imageB64String)
+			return err
+		}
+		imageFileName := fmt.Sprintf("exports/%s/images/%s.%s", audit, pwnDocImages.Data.ID, imageFileExt)
+		err = os.WriteFile(imageFileName, decImage, 0644)
+		if err != nil {
+			return err
+		}
 	}
+	return nil
 }

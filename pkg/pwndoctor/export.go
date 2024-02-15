@@ -66,7 +66,7 @@ func DoExport(includeAuditNames []string, pwndocSSHUser string, pwndocSSHHost st
 		fmt.Printf("[+] Exporting Audit:(%s) Company:(%s)", audit.Name, audit.Company.Name)
 		err = ExportAudit(audit)
 		if err != nil {
-			log.Fatal("[-] Error reading response body (exporting audit): ", err)
+			log.Fatal("[-] Error exporting audit response body (exporting audit): ", err)
 		}
 		fmt.Println("\n[+] Done exporting exporting audit info...")
 
@@ -146,8 +146,26 @@ func ExportAudit(audit pwndoc.APIAudit) error {
 			return err
 		}
 
-		pwndoc.DownloadImagesInContent(finding.Poc, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.ID)
-		pwndoc.DownloadImagesInContent(finding.Remediation, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.ID)
+		err = pwndoc.DownloadImagesInContent(finding.Description, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
+		if err != nil {
+			return err
+		}
+		err = pwndoc.DownloadImagesInContent(finding.Observation, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
+		if err != nil {
+			return err
+		}
+		err = pwndoc.DownloadImagesInContent(finding.Poc, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
+		if err != nil {
+			return err
+		}
+		err = pwndoc.DownloadImagesInContent(finding.AffectedAssets, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
+		if err != nil {
+			return err
+		}
+		err = pwndoc.DownloadImagesInContent(finding.Remediation, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil
