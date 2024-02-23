@@ -46,7 +46,7 @@ type APIAudit struct {
 				Description string `json:"description"`
 				Options     []any  `json:"options"`
 			} `json:"customField"`
-			Text string `json:"text"`
+			Text any `json:"text"`
 		} `json:"customFields"`
 		ID string `json:"_id"`
 	} `json:"sections"`
