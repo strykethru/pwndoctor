@@ -5,14 +5,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"os"
+	"strings"
+
 	"github.com/defektive/secrets"
 	"github.com/fatih/color"
 	"github.com/strykethru/pwndoctor/pkg/pwndoc"
 	"github.com/strykethru/pwndoctor/pkg/util"
 	"golang.org/x/term"
-	"os"
-	"strings"
-	"syscall"
 )
 
 func GetCredentialsFromPwndocJSON() (pwndoc.APILogin, error) {
@@ -82,7 +82,8 @@ func GetCredentialToken() (string, string, string) {
 	}
 
 	blue("  [*] Enter Password: ")
-	bytePassword, err := term.ReadPassword(syscall.Stdin)
+	// bytePassword, err := term.ReadPassword(syscall.Stdin)
+	bytePassword, err := term.ReadPassword(0)
 	if err != nil {
 		red("[-] Error reading password: %s\n", err)
 		os.Exit(0)
