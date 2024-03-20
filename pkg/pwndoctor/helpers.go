@@ -377,3 +377,16 @@ func CreateSettings() {
 	}
 	fmt.Println("[+] Done Importing APISettings!")
 }
+
+func GetAuditNames() []string {
+	audits, err := pwndocAPI.GetAudits()
+	if err != nil {
+		log.Fatalf("Error getting audits: %s", err)
+	}
+
+	var auditNames []string
+	for _, audit := range audits.Data {
+		auditNames = append(auditNames, audit.Name)
+	}
+	return auditNames
+}

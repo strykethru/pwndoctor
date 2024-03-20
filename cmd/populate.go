@@ -46,7 +46,7 @@ var csCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(csCmd)
 
-	csCmd.Flags().StringVarP(&PwnDocURL, "url", "u", "", "PwnDoc-NG URL")
+	csCmd.Flags().StringVarP(&PwnDocURL, "url", "u", "", "PwnDoc-NG URL (i.e https://127.0.0.1:8443)")
 	csCmd.Flags().BoolP("init", "i", false, "Create initial user")
 	//err := csCmd.MarkFlagRequired("region")
 	//if err != nil {
