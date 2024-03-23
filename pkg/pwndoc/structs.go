@@ -288,3 +288,9 @@ type APIResponseSettings struct {
 	Status string      `json:"status"`
 	Data   APISettings `json:"datas"`
 }
+
+type APICreateAudit struct {
+	Name      string `json:"name"`
+	Language  string `json:"language"`
+	AuditType string `json:"auditType"`
+}

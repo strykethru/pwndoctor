@@ -298,3 +298,14 @@ func (api *API) GetSettings() (*APIResponseSettings, error) {
 	err = json.Unmarshal(body, &exportedSettings)
 	return &exportedSettings, err
 }
+
+func (api *API) CreateAudit(auditName string, language string, auditType string) error {
+
+	body, err := api.PostResponseBody(PathAudits, bytes.NewReader([]byte(fmt.Sprintf(`{"name":"%s","language":"%s","auditType":"%s"}`, auditName, language, auditType))))
+	fmt.Println(string(body))
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
