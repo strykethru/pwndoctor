@@ -101,13 +101,15 @@ func DoExport(includeAuditNames []string, pwndocSSHUser string, pwndocSSHHost st
 	// THIS IS WHERE WE DUMP MONGODB //
 	///////////////////////////////////
 
-	fmt.Println("\n[+] Dumping MongoDB...")
-	err = ExportMongoDB("exports/mongodb.dump", pwndocSSHUser, pwndocSSHHost)
-	if err != nil {
-		log.Printf("[-] Error exporting mongodb: %s", err)
-		return
+	if pwndocSSHUser != "" || pwndocSSHHost != "" {
+		fmt.Println("\n[+] Dumping MongoDB...")
+		err = ExportMongoDB("exports/mongodb.dump", pwndocSSHUser, pwndocSSHHost)
+		if err != nil {
+			log.Printf("[-] Error exporting mongodb: %s", err)
+			return
+		}
+		fmt.Println("[+] Finished Dumping MongoDB!")
 	}
-	fmt.Println("[+] Finished Dumping MongoDB!")
 
 	//////////////////////////////////////
 	// THIS IS WHERE WE EXPORT SETTINGS //
