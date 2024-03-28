@@ -4,11 +4,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/strykethru/pwndoctor/pkg/pwndoc"
 	"log"
 	"os"
 	"os/exec"
 	"runtime"
+
+	"github.com/strykethru/pwndoctor/pkg/pwndoc"
 )
 
 const MongoDBDockerExport = "docker exec -i mongo-pwndoc-ng /usr/bin/mongodump --uri=mongodb://127.0.0.1/pwndoc --archive"
@@ -45,7 +46,6 @@ func DoExport(includeAuditNames []string, pwndocSSHUser string, pwndocSSHHost st
 				}
 			}
 			if !isAuditIncluded {
-				fmt.Println("Skipping...")
 				continue
 			}
 		}
