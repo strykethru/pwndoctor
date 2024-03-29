@@ -312,11 +312,33 @@ func (api *API) CreateAudit(auditName string, language string, auditType string)
 	return &audit, err
 }
 
-func (api *API) CreateFinding(auditID string, finding APIFindingDetails) error {
+func (api *API) CreateNewFinding(auditID string, finding APIFindingDetails) error {
 	bodyReader, err := util.MarshalStuff(finding)
+	if err != nil {
+		return err
+	}
 
 	//not sure about body reader, make sure path is right
 	body, err := api.PostResponseBody(PathAudits+"/"+auditID+"/findings", bodyReader)
+	if err != nil {
+		return err
+
+	}
+
+	print(string(body))
+	println()
+
+	return err
+}
+
+func (api *API) CreateNewSection(auditID string, section any, sectionID string) error {
+	bodyReader, err := util.MarshalStuff(section)
+	if err != nil {
+		return err
+	}
+
+	//not sure about body reader, make sure path is right
+	body, err := api.PutResponseBody(PathAudits+"/"+auditID+"/sections/"+sectionID, bodyReader)
 	if err != nil {
 		return err
 

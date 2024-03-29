@@ -346,3 +346,24 @@ type APIPostCreateAudits struct {
 		} `json:"audit"`
 	} `json:"datas"`
 }
+
+type APISectionPut struct {
+	Field        string `json:"field"`
+	Name         string `json:"name"`
+	CustomFields []struct {
+		CustomField struct {
+			ID          string        `json:"_id"`
+			FieldType   string        `json:"fieldType"`
+			Label       string        `json:"label"`
+			Display     string        `json:"display"`
+			DisplaySub  string        `json:"displaySub"`
+			Size        int           `json:"size"`
+			Offset      int           `json:"offset"`
+			Required    bool          `json:"required"`
+			Description string        `json:"description"`
+			Options     []interface{} `json:"options"`
+		} `json:"customField"`
+		Text string `json:"text"`
+	} `json:"customFields"`
+	ID string `json:"_id"`
+}

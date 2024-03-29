@@ -94,6 +94,7 @@ func CloneAudit(audit pwndoc.APIAudit, destination string) error {
 		return err
 	}
 	createdauditid := createdaudit.Datas.Audit.ID
+
 	println("created audit ID = " + createdaudit.Datas.Audit.ID)
 
 	file, _ := json.MarshalIndent(retrievedAuditInformation, "", "  ")
@@ -103,6 +104,23 @@ func CloneAudit(audit pwndoc.APIAudit, destination string) error {
 		return err
 	}
 
+	// Create the custom sections YOLO
+	for a, section := range retrievedAuditInformation.Data.Sections {
+
+		// Create the section
+		// println("\n creating section, hold on to your butts")
+		// println("from: " + retrievedAuditInformation.Data.ID)
+		// println("to: " + createdauditid)
+		// println("section.ID = " + section.ID)
+		// println("section.Title = " + section.Name)
+		// fmt.Println(section)
+		fmt.Println("Creating section: \n\n", section)
+		println("section.ID = " + section.ID + "\n\n\n")
+		err = pwndocAPI.CreateNewSection(createdauditid, section, createdaudit.Datas.Audit.Sections[a].ID)
+		if err != nil {
+			return err
+		}
+	}
 	for _, finding := range retrievedAuditInformation.Data.Findings {
 
 		// Create the finding
@@ -113,7 +131,7 @@ func CloneAudit(audit pwndoc.APIAudit, destination string) error {
 		println("finding.Title = " + finding.Title)
 		println("finding.Description = " + finding.Description)
 		println("finding.Observation = " + finding.Observation)
-		err = pwndocAPI.CreateFinding(createdauditid, finding)
+		err = pwndocAPI.CreateNewFinding(createdauditid, finding)
 		if err != nil {
 			return err
 		}
