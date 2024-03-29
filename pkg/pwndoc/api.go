@@ -299,13 +299,32 @@ func (api *API) GetSettings() (*APIResponseSettings, error) {
 	return &exportedSettings, err
 }
 
-func (api *API) CreateAudit(auditName string, language string, auditType string) error {
+func (api *API) CreateAudit(auditName string, language string, auditType string) (*APIPostCreateAudits, error) {
 
 	body, err := api.PostResponseBody(PathAudits, bytes.NewReader([]byte(fmt.Sprintf(`{"name":"%s","language":"%s","auditType":"%s"}`, auditName, language, auditType))))
 	fmt.Println(string(body))
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	var audit APIPostCreateAudits
+	err = json.Unmarshal(body, &audit)
+	return &audit, err
+}
+
+func (api *API) CreateFinding(auditID string, finding APIFindingDetails) error {
+	bodyReader, err := util.MarshalStuff(finding)
+
+	//not sure about body reader, make sure path is right
+	body, err := api.PostResponseBody(PathAudits+"/"+auditID+"/findings", bodyReader)
+	if err != nil {
+		return err
+
+	}
+	println("pls work")
+
+	print(string(body))
+	println()
+
+	return err
 }

@@ -2,6 +2,7 @@ package pwndoc
 
 import (
 	"fmt"
+	"time"
 )
 
 type APILogin struct {
@@ -293,4 +294,55 @@ type APICreateAudit struct {
 	Name      string `json:"name"`
 	Language  string `json:"language"`
 	AuditType string `json:"auditType"`
+}
+
+type APIPostCreateAudits struct {
+	Status string `json:"status"`
+	Datas  struct {
+		Message string `json:"message"`
+		Audit   struct {
+			Name          string        `json:"name"`
+			AuditType     string        `json:"auditType"`
+			Collaborators []interface{} `json:"collaborators"`
+			Reviewers     []interface{} `json:"reviewers"`
+			Language      string        `json:"language"`
+			Template      string        `json:"template"`
+			Creator       string        `json:"creator"`
+			Sections      []struct {
+				Field        string `json:"field"`
+				Name         string `json:"name"`
+				CustomFields []struct {
+					CustomField struct {
+						ID          string        `json:"_id"`
+						FieldType   string        `json:"fieldType"`
+						Label       string        `json:"label"`
+						Display     string        `json:"display"`
+						DisplaySub  string        `json:"displaySub"`
+						Size        int           `json:"size"`
+						Offset      int           `json:"offset"`
+						Required    bool          `json:"required"`
+						Description string        `json:"description"`
+						Options     []interface{} `json:"options"`
+					} `json:"customField"`
+					Text string `json:"text"`
+				} `json:"customFields"`
+				ID string `json:"_id"`
+			} `json:"sections"`
+			CustomFields []interface{} `json:"customFields"`
+			SortFindings []struct {
+				Category  string `json:"category"`
+				SortValue string `json:"sortValue"`
+				SortOrder string `json:"sortOrder"`
+				SortAuto  bool   `json:"sortAuto"`
+			} `json:"sortFindings"`
+			State     string        `json:"state"`
+			Approvals []interface{} `json:"approvals"`
+			ID        string        `json:"_id"`
+			Scope     []interface{} `json:"scope"`
+			Findings  []interface{} `json:"findings"`
+			CreatedAt time.Time     `json:"createdAt"`
+			UpdatedAt time.Time     `json:"updatedAt"`
+			V         int           `json:"__v"`
+		} `json:"audit"`
+	} `json:"datas"`
 }

@@ -76,66 +76,81 @@ func DoClone(includeAuditNames []string, destination string) {
 
 func CloneAudit(audit pwndoc.APIAudit, destination string) error {
 
-	{
-		retrievedAuditInformation, err := pwndocAPI.GetAudit(audit.ID)
+	retrievedAuditInformation, err := pwndocAPI.GetAudit(audit.ID)
+	if err != nil {
+		return err
+	}
+	// I think i need to create the audit here first and forgo all the file creation/expor
+
+	println("\n creating new audit")
+	lang := retrievedAuditInformation.Data.Language
+	println("lang =" + lang)
+	auditType := retrievedAuditInformation.Data.AuditType
+	println("auditType =" + auditType)
+
+	//create the audit
+	createdaudit, err := pwndocAPI.CreateAudit(destination, lang, auditType)
+	if err != nil {
+		return err
+	}
+	createdauditid := createdaudit.Datas.Audit.ID
+	println("created audit ID = " + createdaudit.Datas.Audit.ID)
+
+	file, _ := json.MarshalIndent(retrievedAuditInformation, "", "  ")
+	fileName := fmt.Sprintf("exports/%s/audit-findings/OG-%s-finding.json", audit.Name, retrievedAuditInformation.Data.ID)
+	err = os.WriteFile(fileName, file, 0644)
+	if err != nil {
+		return err
+	}
+
+	for _, finding := range retrievedAuditInformation.Data.Findings {
+
+		// Create the finding
+		println("\n creating finding, hold on to your butts")
+		println("from: " + retrievedAuditInformation.Data.ID)
+		println("to: " + createdauditid)
+		println("finding.ID = " + finding.ID)
+		println("finding.Title = " + finding.Title)
+		println("finding.Description = " + finding.Description)
+		println("finding.Observation = " + finding.Observation)
+		err = pwndocAPI.CreateFinding(createdauditid, finding)
 		if err != nil {
 			return err
 		}
 
-		file, _ := json.MarshalIndent(retrievedAuditInformation, "", "  ")
-		fileName := fmt.Sprintf("exports/%s/audit-findings/OG-%s-finding.json", audit.Name, retrievedAuditInformation.Data.ID)
+		file, err := json.MarshalIndent(finding, "", "  ")
+		if err != nil {
+			return err
+		}
+		fileName := fmt.Sprintf("exports/%s/audit-findings/%s-finding.json", audit.Name, finding.ID)
 		err = os.WriteFile(fileName, file, 0644)
 		if err != nil {
 			return err
 		}
 
-		for _, finding := range retrievedAuditInformation.Data.Findings {
-			file, err := json.MarshalIndent(finding, "", "  ")
-			if err != nil {
-				return err
-			}
-			fileName := fmt.Sprintf("exports/%s/audit-findings/%s-finding.json", audit.Name, finding.ID)
-			err = os.WriteFile(fileName, file, 0644)
-			if err != nil {
-				return err
-			}
-
-			err = pwndoc.DownloadImagesInContent(finding.Description, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
-			if err != nil {
-				return err
-			}
-			err = pwndoc.DownloadImagesInContent(finding.Observation, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
-			if err != nil {
-				return err
-			}
-			err = pwndoc.DownloadImagesInContent(finding.Poc, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
-			if err != nil {
-				return err
-			}
-			err = pwndoc.DownloadImagesInContent(finding.AffectedAssets, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
-			if err != nil {
-				return err
-			}
-			err = pwndoc.DownloadImagesInContent(finding.Remediation, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
-			if err != nil {
-				return err
-			}
-		}
-
-		println("\n importing audit")
-		lang := retrievedAuditInformation.Data.Language
-		println("lang =" + lang)
-		auditType := retrievedAuditInformation.Data.AuditType
-		println("auditType =" + auditType)
-
-		err = pwndocAPI.CreateAudit(destination, lang, auditType)
+		err = pwndoc.DownloadImagesInContent(finding.Description, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
 		if err != nil {
 			return err
 		}
-
-		return nil
-
+		err = pwndoc.DownloadImagesInContent(finding.Observation, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
+		if err != nil {
+			return err
+		}
+		err = pwndoc.DownloadImagesInContent(finding.Poc, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
+		if err != nil {
+			return err
+		}
+		err = pwndoc.DownloadImagesInContent(finding.AffectedAssets, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
+		if err != nil {
+			return err
+		}
+		err = pwndoc.DownloadImagesInContent(finding.Remediation, pwndocAPI.Token, pwndocAPI.HTTPClient, audit.Name)
+		if err != nil {
+			return err
+		}
 	}
+
+	return nil
 }
 
 // func PostCloneAudit(audit pwndoc.APIAudit) error {
