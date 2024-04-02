@@ -377,29 +377,3 @@ func CreateSettings() {
 	}
 	fmt.Println("[+] Done Importing APISettings!")
 }
-
-func GetAuditNames() []string {
-	audits, err := pwndocAPI.GetAudits()
-	if err != nil {
-		log.Fatalf("Error getting audits: %s", err)
-	}
-
-	var auditNames []string
-	for _, audit := range audits.Data {
-		auditNames = append(auditNames, audit.Name)
-	}
-	return auditNames
-}
-
-// func CreateAudit(newAuditName string, auditLanguage string, auditType string) {
-// 	// audit := pwndoc.APICreateAudit{
-// 	// 	Name:    newAuditName,
-// 	// 	Language: auditLanguage,
-// 	// 	AuditType: auditType,
-// 	// }
-
-// 	_, err := pwndocAPI.CreateAudit(audit)
-// 	if err != nil {
-// 		log.Fatalf("Error creating audit: %s", err)
-// 	}
-// }
