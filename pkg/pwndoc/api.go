@@ -326,7 +326,6 @@ func (api *API) CreateNewFinding(auditID string, finding APIFindingDetails) erro
 	}
 
 	print(string(body))
-	println()
 
 	return err
 }
@@ -343,10 +342,8 @@ func (api *API) CreateNewSection(auditID string, section any, sectionID string) 
 		return err
 
 	}
-	println("pls work")
 
-	print(string(body))
-	println()
+	println(string(body))
 
 	return err
 }
