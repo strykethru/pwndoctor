@@ -390,16 +390,3 @@ func GetAuditNames() []string {
 	}
 	return auditNames
 }
-
-// func CreateAudit(newAuditName string, auditLanguage string, auditType string) {
-// 	// audit := pwndoc.APICreateAudit{
-// 	// 	Name:    newAuditName,
-// 	// 	Language: auditLanguage,
-// 	// 	AuditType: auditType,
-// 	// }
-
-// 	_, err := pwndocAPI.CreateAudit(audit)
-// 	if err != nil {
-// 		log.Fatalf("Error creating audit: %s", err)
-// 	}
-// }
