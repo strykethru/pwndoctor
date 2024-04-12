@@ -298,3 +298,52 @@ func (api *API) GetSettings() (*APIResponseSettings, error) {
 	err = json.Unmarshal(body, &exportedSettings)
 	return &exportedSettings, err
 }
+
+func (api *API) CreateAudit(auditName string, language string, auditType string) (*APIPostCreateAudits, error) {
+
+	body, err := api.PostResponseBody(PathAudits, bytes.NewReader([]byte(fmt.Sprintf(`{"name":"%s","language":"%s","auditType":"%s"}`, auditName, language, auditType))))
+	fmt.Println(string(body))
+	if err != nil {
+		return nil, err
+	}
+
+	var audit APIPostCreateAudits
+	err = json.Unmarshal(body, &audit)
+	return &audit, err
+}
+
+func (api *API) CreateNewFinding(auditID string, finding APIFindingDetails) error {
+	bodyReader, err := util.MarshalStuff(finding)
+	if err != nil {
+		return err
+	}
+
+	//not sure about body reader, make sure path is right
+	body, err := api.PostResponseBody(PathAudits+"/"+auditID+"/findings", bodyReader)
+	if err != nil {
+		return err
+
+	}
+
+	print(string(body))
+
+	return err
+}
+
+func (api *API) CreateNewSection(auditID string, section any, sectionID string) error {
+	bodyReader, err := util.MarshalStuff(section)
+	if err != nil {
+		return err
+	}
+
+	//not sure about body reader, make sure path is right
+	body, err := api.PutResponseBody(PathAudits+"/"+auditID+"/sections/"+sectionID, bodyReader)
+	if err != nil {
+		return err
+
+	}
+
+	println(string(body))
+
+	return err
+}

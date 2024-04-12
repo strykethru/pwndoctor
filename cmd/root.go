@@ -8,7 +8,7 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "go-pwndoc",
+	Use:   "pwndoctor",
 	Short: "Go tool used with pwndoc",
 	Long: "Purpose: Populates Custom Sections and Fields\n" +
 		"If using KeepassXC, you can now pull your pwndoc credentials from your vault " +
@@ -40,7 +40,7 @@ func init() {
 	// will be global for your application.
 
 	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.go-pwndoc.yaml)")
-
+	rootCmd.PersistentFlags().StringVarP(&PwnDocURL, "url", "u", "", "PwnDoc-NG URL (i.e https://127.0.0.1:8443)")
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	//rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")

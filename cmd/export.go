@@ -1,9 +1,10 @@
 package cmd
 
 import (
+	"strings"
+
 	"github.com/spf13/cobra"
 	"github.com/strykethru/pwndoctor/pkg/pwndoctor"
-	"strings"
 )
 
 var EngagementName string
@@ -30,7 +31,7 @@ var exportCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(exportCmd)
-	exportCmd.Flags().StringVarP(&PwnDocURL, "url", "u", "", "PwnDoc-NG URL")
+	exportCmd.Flags().StringVarP(&PwnDocURL, "url", "u", "", "PwnDoc-NG URL (i.e. https://127.0.0.1:8443)")
 	exportCmd.Flags().StringVarP(&pwndocSSHHost, "ip", "i", "", "PwnDoc-NG SSH IP (for mongodb dump)")
 	exportCmd.Flags().StringVarP(&pwndocSSHUser, "user", "U", "ubuntu", "PwnDoc-NG SSH user (for mongodb dump)")
 	exportCmd.Flags().StringVarP(&EngagementName, "engagement", "e", "", "Engagement Name")
